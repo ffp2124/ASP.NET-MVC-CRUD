@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ExerciseModelStoreContainer" CdmEntityContainer="ExerciseEntities">
+    <EntitySetMapping Name="ExerciseRecords">
+      <EntityTypeMapping TypeName="ExerciseModel.ExerciseRecord">
+        <MappingFragment StoreEntitySet="ExerciseRecord">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ExerciseName" ColumnName="ExerciseName" />
+          <ScalarProperty Name="ExerciseDate" ColumnName="ExerciseDate" />
+          <ScalarProperty Name="DurationInMinutes" ColumnName="DurationInMinutes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

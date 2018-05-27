@@ -1,0 +1,82 @@
+﻿@model Model.ExerciseRecord
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+<br /><br />
+@Html.TextBox("Search")<input type="submit" id="SearchBtn" value="Search" /><br /><br />
+
+<div class="container" style="margin-top:3%"></div>
+<a href="#" class="btn btn-info"  onclick="addNewExercise(0)">Add New Exercise</a> <br /><br />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Exercise Name</th>
+            <th>Exercise Date</th>
+            <th>Duration in minutes</th>
+        </tr>
+    </thead>
+    <tbody id="SetExerciseList" class="DataSearching"></tbody>
+</table>
+@*Create A Popup Modal With Registration Form For Add Or Edit Exercise Record*@
+
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" onclick="clearForm()" class="close" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        @Html.HiddenFor(m => m.Id, new { @id = "exerId" })
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.ExerciseName, new { @id = "exerciseName", @class = "form-control", @placeholder = "Name*" })
+                            @Html.ValidationMessageFor(m => m.ExerciseName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.EditorFor(m => m.ExerciseDate, new { htmlAttributes = new { @id = "exerciseDate", @class = "form-control datePicker" } })
+                            @Html.ValidationMessageFor(m => m.ExerciseDate, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.DurationInMinutes, new { @id = "duration", @class = "form-control", @placeholder = "duration*" })
+                            @Html.ValidationMessageFor(m => m.DurationInMinutes, "", new { @class = "text-danger" })
+                            <br /><span id="error" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-block btn-primary" id="SaveExerciseRecord" onclick="saveRecord()">Save</a>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="DeleteConfirmation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4>Delete Exercise Record</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Are You Sure? You Want To Delete This Record.</h4>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" data-dismiss="modal" id="r">Cancle</a>
+                <a href="#" class="btn btn-danger" onclick="confirmDelete()">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="paged">
+
+</div>
+
